@@ -1,2 +1,7 @@
 **/bin
 **/obj
+# Exclude ReSharper indexLayout.xml file
+indexLayout.xml
+
+# Exclude JetBrains IDE vcs.xml file
+vcs.xml

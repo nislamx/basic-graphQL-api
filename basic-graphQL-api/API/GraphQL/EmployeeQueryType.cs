@@ -6,6 +6,6 @@ public class EmployeeQueryType : ObjectType<EmployeeQuery>
 {
     protected override void Configure(IObjectTypeDescriptor<EmployeeQuery> descriptor)
     {
-        descriptor.Field(q => q.GetAllEmployees()).Type<EmployeeType>();
+        descriptor.Field(q => q.GetAllEmployees()).Type<ListType<EmployeeType>>();
     }
 }

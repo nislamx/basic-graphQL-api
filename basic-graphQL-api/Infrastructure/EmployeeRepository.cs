@@ -2,7 +2,7 @@ using basic_graphQL_api.Core.Entities;
 
 namespace basic_graphQL_api.Infrastructure;
 
-interface IEmployeeRepo
+public interface IEmployeeRepo
 {
     public IEnumerable<EmployeeEntity> GetAllEmployees();
 }

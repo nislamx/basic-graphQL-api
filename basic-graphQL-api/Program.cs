@@ -1,3 +1,4 @@
+using basic_graphQL_api.API.GraphQL;
 using basic_graphQL_api.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,6 +8,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<IEmployeeRepo, EmployeeRepository>();
+
+builder.Services
+    .AddGraphQLServer()
+    .AddQueryType<EmployeeQueryType>();
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -26,5 +33,6 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
+app.MapGraphQL();  
 
 app.Run();

@@ -6,14 +6,17 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
+builder.Services.AddDbContextFactory<ApplicationDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 
 builder.Services.AddScoped<IEmployeeRepo, EmployeeRepository>();
 
 builder.Services
     .AddGraphQLServer()
-    .AddQueryType<EmployeeQueryType>();
+    .AddQueryType<EmployeeQueryType>()
+    .AddErrorFilter(error => new Error(error.Exception.InnerException?.Message ?? error.Exception.Message));
+
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
